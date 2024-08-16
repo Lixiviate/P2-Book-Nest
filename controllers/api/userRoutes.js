@@ -3,7 +3,7 @@ const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const withAuth = require('../../utils/auth');
 
-// Signup Route
+// Signup Route http://localhost:3001/api/users/signup
 router.post('/signup', async (req, res) => {
   try {
     const hashPass = await bcrypt.hash(req.body.password, 10);
@@ -25,7 +25,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Login Route
+// Login Route http://localhost:3001/api/users/login
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logout Route
+// Logout Route http://localhost:3001/api/users/logout
 router.post('/logout', withAuth, (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
