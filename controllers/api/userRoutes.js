@@ -6,7 +6,12 @@ const withAuth = require('../../utils/auth');
 // Signup Route
 router.post('/signup', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const hashPass = await bcrypt.hash(req.body.password, 10);
+    const userData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashPass,
+    });
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
@@ -27,12 +32,19 @@ router.post('/login', async (req, res) => {
       where: { username: req.body.username },
     });
     if (!userData) {
-      res.status(400).json({ message: 'Incorrect, please try again' });
+      res
+        .status(400)
+        .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      userData.password,
+    );
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect, please try again' });
+      res
+        .status(400)
+        .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
     req.session.save(() => {
@@ -46,7 +58,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout Route
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
