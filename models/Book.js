@@ -12,50 +12,43 @@ Book.init(
         autoIncrement: true
     },
     title: {
-      type: DataTypes.STRING,
-      allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false
     },
     author: {
-      type: DataTypes.STRING,
-      allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false
     },
     desc: {
-      type: DataTypes.STRING
+        type: DataTypes.STRING
     },
     cover_img: {
-      type: DataTypes.STRING
+        type: DataTypes.STRING
     },
     status: {
-      type: DataTypes.STRING,
-      allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false
     },
     isbn: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    rating: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    comment: {
-      type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     owner_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id',
-      }
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        }
     },
     holder_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id',
-      }
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id',
+        }
     }
   },
   {
