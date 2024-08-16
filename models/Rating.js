@@ -19,7 +19,7 @@ Rating.init(
             max: 5
         }
     },
-    userId: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -27,7 +27,7 @@ Rating.init(
             key: 'id'
         }
     },
-    bookId: {
+    book_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

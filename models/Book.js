@@ -8,55 +8,57 @@ Book.init(
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
     },
     title: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     author: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     desc: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
     },
     cover_img: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     isbn: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
     },
-    owner_id: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: 'user',
           key: 'id',
-        }
+        },
     },
     holder_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'user',
+          model: 'holder',
           key: 'id',
-        }
-    }
+        },
+    },
   },
   {
     // Link to database connection
     sequelize,
     timestamps: false,
+    freezeTableName: true,
     underscored: true,
-    modelName: 'book'
+    modelName: 'book',
   }
 );
 
