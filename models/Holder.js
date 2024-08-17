@@ -6,26 +6,25 @@ class Holder extends Model {}
 Holder.init(
   {
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true,
-        primaryKey: true,
-        autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    username: {
-        type: DataTypes.STRING,
-        unique: true,
-        references: {
-            model: 'user',
-            key: 'username'
-        },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
     },
     book_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'book',
-            key: 'id'
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'book',
+        key: 'id',
+      },
     },
   },
   {
@@ -34,7 +33,7 @@ Holder.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'holder',
-  }
+  },
 );
 
 module.exports = Holder;

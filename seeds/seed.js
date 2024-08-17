@@ -6,10 +6,8 @@ const seedHolder = require('./holderData');
 const seedAll = async () => {
   await sequelize.sync({ force: true });
 
-  await seedBook();
-
   await seedUser();
-
+  await seedBook();
   await seedHolder();
 
   process.exit(0);
