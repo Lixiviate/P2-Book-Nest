@@ -1,0 +1,62 @@
+[
+    {
+        "comment": "An incredible journey that started it all. Timeless and magical!",
+        "user_id": 1,
+        "book_id": 1
+    },
+    {
+        "comment": "This book is a masterpiece. It introduced me to a whole new world!",
+        "user_id": 2,
+        "book_id": 2
+    },
+    {
+        "comment": "A gripping tale full of intrigue and unexpected twists. A must-read for fantasy fans.",
+        "user_id": 3,
+        "book_id": 3
+    },
+    {
+        "comment": "Dark, mysterious, and utterly compelling. Couldn’t put it down!",
+        "user_id": 4,
+        "book_id": 4
+    },
+    {
+        "comment": "Twisted and intense. This thriller kept me guessing until the very end.",
+        "user_id": 5,
+        "book_id": 5
+    },
+    {
+        "comment": "A fascinating mix of history and mystery. Brilliantly crafted.",
+        "user_id": 1,
+        "book_id": 6
+    },
+    {
+        "comment": "The quintessential Sherlock Holmes story. Absolutely loved it!",
+        "user_id": 2,
+        "book_id": 7
+    },
+    {
+        "comment": "Christie at her best! A classic mystery with an unforgettable ending.",
+        "user_id": 3,
+        "book_id": 8
+    },
+    {
+        "comment": "Chandler’s writing style is unparalleled. A gritty and immersive read.",
+        "user_id": 4,
+        "book_id": 9
+    },
+    {
+        "comment": "A complex and thought-provoking sci-fi epic. Truly a masterpiece.",
+        "user_id": 5,
+        "book_id": 10
+    },
+    {
+        "comment": "A thrilling read with deep philosophical undertones. Ender’s journey is unforgettable.",
+        "user_id": 1,
+        "book_id": 11
+    },
+    {
+        "comment": "Le Guin’s world-building is second to none. A captivating and unique story.",
+        "user_id": 2,
+        "book_id": 12
+    }
+]
