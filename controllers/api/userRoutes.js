@@ -6,20 +6,17 @@ const withAuth = require('../../utils/auth');
 // Signup Route http://localhost:3001/api/users/signup
 router.post('/signup', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
     // Enforce password length validation
-    if (password.length < 8) {
+    if (req.body.password.length < 8) {
       return res.status(400).json({
         message: 'Password must be at least 8 characters long.',
       });
     }
 
-    const hashPass = await bcrypt.hash(password, 10);
     const userData = await User.create({
-      username,
-      email,
-      password: hashPass,
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     });
 
     req.session.save(() => {
