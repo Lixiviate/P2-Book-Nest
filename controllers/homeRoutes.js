@@ -11,15 +11,13 @@ router.get('/', async (req, res) => {
           attributes: ['username'],
         },
         {
-            model: Holder,
-            attributes: ['username'],
+          model: Holder,
+          attributes: ['username'],
         },
       ],
     });
 
-    const books = dbBookData.map((book) =>
-      book.get({ plain: true })
-    );
+    const books = dbBookData.map((book) => book.get({ plain: true }));
     res.render('homepage', {
       books,
       loggedIn: req.session.loggedIn,
