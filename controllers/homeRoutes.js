@@ -34,4 +34,24 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET login page
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+// GET signup page
+router.get('/signup', (req, res) => {
+  // If user is logged in, redirect to homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // Render signup page
+  res.render('signup');
+});
+
 module.exports = router;
