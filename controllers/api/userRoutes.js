@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
+const bcrypt = require('bcrypt');
 
 // Signup Route http://localhost:3001/api/users/signup
 router.post('/signup', async (req, res) => {

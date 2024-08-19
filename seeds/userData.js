@@ -19,7 +19,7 @@ const userData = [
   {
     username: 'bobwilson101',
     email: 'bobwilson101@example.com',
-    password: 'bob_secure101```,
+    password: 'bob_secure101',
   },
   {
     username: 'gracetaylor202',
@@ -29,7 +29,10 @@ const userData = [
 ];
 
 const seedUsers = async () => {
-  await User.bulkCreate(userData);
+  await User.bulkCreate(userData, {
+    individualHooks: true,
+    returning: true,
+  });
 };
 
 module.exports = seedUsers;
