@@ -12,11 +12,11 @@ router.post('/signup', async (req, res) => {
         message: 'Password must be at least 8 characters long.',
       });
     }
-
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const userData = await User.create({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
     });
 
     req.session.save(() => {
@@ -38,22 +38,26 @@ router.post('/login', async (req, res) => {
     const userData = await User.findOne({
       where: { username: req.body.username },
     });
+
     if (!userData) {
       res
         .status(400)
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
+
     const validPassword = await bcrypt.compare(
       req.body.password,
       userData.password,
     );
+
     if (!validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
