@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const bcrypt = require('bcrypt');
 const withAuth = require('../../utils/auth');
 
 // Signup Route http://localhost:3001/api/users/signup
@@ -12,11 +11,10 @@ router.post('/signup', async (req, res) => {
         message: 'Password must be at least 8 characters long.',
       });
     }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const userData = await User.create({
       username: req.body.username,
       email: req.body.email,
-      password: hashedPassword,
+      password: req.body.password,
     });
 
     req.session.save(() => {
