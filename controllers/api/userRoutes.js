@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const bcrypt = require('bcrypt');
 const withAuth = require('../../utils/auth');
+const bcrypt = require('bcrypt');
 
 // Signup Route http://localhost:3001/api/users/signup
 router.post('/signup', async (req, res) => {
@@ -12,7 +12,6 @@ router.post('/signup', async (req, res) => {
         message: 'Password must be at least 8 characters long.',
       });
     }
-
     const userData = await User.create({
       username: req.body.username,
       email: req.body.email,
@@ -38,22 +37,26 @@ router.post('/login', async (req, res) => {
     const userData = await User.findOne({
       where: { username: req.body.username },
     });
+
     if (!userData) {
       res
         .status(400)
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
+
     const validPassword = await bcrypt.compare(
       req.body.password,
       userData.password,
     );
+
     if (!validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect username or password, please try again' });
       return;
     }
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.loggedIn = true;
