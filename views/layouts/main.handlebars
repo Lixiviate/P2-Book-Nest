@@ -8,7 +8,10 @@
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <header>
+    <header>    
+      <h1 class="logo-text">
+     <span class="book-part">BOOK</span><span class="nest-part">NEST</span>
+    </h1>  
       <nav>
         <a href='/'>Home</a>
         {{#if loggedIn}}
@@ -21,6 +24,7 @@
       </nav>
     </header>
     <main>
+
       {{{body}}}
     </main>
     {{#if loggedIn}}
