@@ -115,3 +115,12 @@ input:focus, select:focus, textarea:focus {
 label {
     color: #333;
 }
+
+footer {
+    background-color: #6c8184;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
