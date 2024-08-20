@@ -1,5 +1,3 @@
-// public/js/dashboard.js
-
 document
   .getElementById('book-search-form')
   .addEventListener('submit', async (event) => {
@@ -23,7 +21,7 @@ document
 
 function displayResults(books) {
   const resultsContainer = document.getElementById('search-results');
-  resultsContainer.innerHTML = ''; // Clear previous results
+  resultsContainer.innerHTML = '';
 
   if (books.length === 0) {
     resultsContainer.innerHTML = '<p>No results found</p>';

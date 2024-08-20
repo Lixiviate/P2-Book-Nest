@@ -3,21 +3,24 @@
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.4/css/pico.min.css">
+    <link
+      rel='stylesheet'
+      href='https://unpkg.com/@picocss/pico@1.5.4/css/pico.min.css'
+    />
     <link rel='stylesheet' href='/css/jass.css' />
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    <header class="site-header">    
-      <h1 class="logo-text">
-     <span class="book-part">BOOK</span><span class="nest-part">NEST</span>
-    </h1>  
+    <header class='site-header'>
+      <h1 class='logo-text'>
+        <span class='book-part'>BOOK</span><span class='nest-part'>NEST</span>
+      </h1>
 
       <nav>
         <a href='/'>Home</a>
         {{#if loggedIn}}
           <a href='/dashboard'>Dashboard</a>
-          <button id='logout'>Logout</button>
+          <a href='#' id='logout'>Logout</a>
         {{else}}
           <a href='/login'>Login</a>
           <a href='/signup'>Sign-Up</a>
