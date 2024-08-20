@@ -46,11 +46,18 @@ main {
     max-width: 1200px;
 }
 
+h1 {
+    color: #6c8184;
+}
+
 h2 {
-    color: #6c8184; 
+    color: #84786c; 
     font-size: 1.6rem;
 }
 
+h3 {
+    color: #cb7e4b; 
+}
 button, .btn {
     background-color: #cb7e4b; 
     color: white; 
