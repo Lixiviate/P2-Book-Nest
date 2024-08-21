@@ -1,0 +1,29 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Book Search</h1>
+    <form id='book-search-form'>
+      <input
+        type='text'
+        id='search-query'
+        placeholder='Select ISBN or book name to search...'
+        required
+      />
+      <select id='search-type'>
+        <option value='q'>Book Name</option>
+        <option value='isbn'>ISBN</option>
+      </select>
+      <button type='submit'>Search</button>
+    </form>
+
+    <div id='search-results'>
+      <!-- Results will be inserted here -->
+    </div>
+
+    <script src='/js/dashboard.js'></script>
+  </body>
+</html>
