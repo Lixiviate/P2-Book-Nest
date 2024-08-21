@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Book, Holder } = require('../models');
+const withAuth = require('../utils/auth');
 
 // GET all books for homepage
 router.get('/', async (req, res) => {
@@ -52,6 +53,10 @@ router.get('/signup', (req, res) => {
   }
   // Render signup page
   res.render('signup');
+});
+
+router.get('/dashboard', withAuth, (req, res) => {
+  res.render('dashboard');
 });
 
 module.exports = router;
