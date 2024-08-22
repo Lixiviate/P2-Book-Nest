@@ -15,10 +15,46 @@ header {
     align-items: center;
     text-align: center;
     padding: 2rem 0;
+    position: relative;
 }
 
 header h1 {
     font-size: 1.8rem;
+}
+
+.logo-text {
+    font-family: 'Arial', sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: bold; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.logo-homepage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+header nav {
+    display: flex;
+    gap: 1rem;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+header nav a:hover {
+    background-color: #cb7e4b;
+    color: white;
 }
 
 header nav ul {
@@ -37,16 +73,6 @@ header nav ul li a {
 header nav ul li a:hover {
     background-color: #cb7e4b; 
     color: white;
-}
-
-.logo-text {
-    font-family: 'Arial', sans-serif; 
-    font-size: 2.5rem; 
-    font-weight: bold; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
 }
 
 .book-part {
