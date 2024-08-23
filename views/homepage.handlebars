@@ -6,6 +6,7 @@
 
 <div class="homepage-content">
 <h2>Welcome to BookNest!</h2>
+<h3>Find books. Build community.</h3>
 <h4><a href='/dashboard'>Click here to search for a book!</a></h4>
 </div>
 
@@ -17,14 +18,22 @@
 </div>
 
 {{else}}
-<div class="logo-container">
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Welcome to BookNest!</h1>
+    <div class="logo-container">
         <img src="/images/booknest_logo.png" alt="Book Nest Logo" class="logo">
+    </div>
+  </div>
 </div>
 
 <div class="homepage-content">
-<h2>Welcome to BookNest!</h2>
-<h3>Please <a href='/login'>Login</a> or <a href='/signup'> Sign-Up </a> to continue.</h3>
+<h3>Discover and Share Books</h3>
+<h3><a href='/login'>Login</a> or <a href='/signup'> Sign-Up </a> to continue.</h3>
+
 </div>
+
 {{/if}}
 
 <script src="/js/homepage.js"></script>
