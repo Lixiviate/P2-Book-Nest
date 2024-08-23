@@ -64,6 +64,7 @@ router.post('/login', async (req, res) => {
       req.session.username = userData.username;
       req.session.email = userData.email;
       req.session.loggedIn = true;
+      req.session.justLoggedIn = true;
       res.json({ user: userData, message: 'You are logged in!' });
     });
   } catch (err) {
