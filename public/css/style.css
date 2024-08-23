@@ -61,7 +61,7 @@ html {
   align-items: center;
   flex-direction: center;
   border-radius: 50%;
-  border: 5px solid white;
+  border: 5px solid #6c8184;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
