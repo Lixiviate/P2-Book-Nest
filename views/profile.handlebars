@@ -1,22 +1,40 @@
 <!-- Show username, email, and password boxes, each with an "update" button for updating the respective information -->
 
 <form>
-    <fieldset>
+    <fieldset class="username-form">
 
-        <label>Change username?</label>
-        <input id="username-update" name="Username" placeholder={{username}} aria-label="Username" autocomplete="username" />
-        <small>I agree, this previous one sucks.</small>
+        <input id="username-update" type="username" name="Username" placeholder={{username}} aria-label="Username"
+            autocomplete="username" />
+        <div class="grid">
+            <div>{{username-message}}</div>
+            <button id="user-submit" type="submit">Update username</button>
+        </div>
 
-        <label>Change email?</label>
-        <input id="email-update" name="Email" placeholder={{email}} aria-label="Email" autocomplete="email" />
-        <small>We've already shared your email with everyone.</small>
+    </fieldset>
+</form>
 
-        <label>Change password?</label>
-        <input type="password" name="Password" placeholder="Password" aria-label="Password"
+<form>
+    <fieldset class="email-form">
+
+        <input id="email-update" type="email" name="Email" placeholder={{email}} aria-label="Email"
+            autocomplete="email" />
+        <div class="grid">
+            <div>{{email-message}}</div>
+            <button id="email-submit" type="submit">Update email</button>
+        </div>
+
+    </fieldset>
+</form>
+
+<form>
+    <fieldset class="pass-form">
+
+        <input id="password-update" type="password" name="Password" placeholder="Password" aria-label="Password"
             autocomplete="current-password" />
-            <small>... Let me jot this down.</small>
-
-        <button type="submit">Update information</button>
+        <div class="grid">
+            <div>{{password-message}}</div>
+            <button id="password-submit" type="submit">Update password</button>
+        </div>        
 
     </fieldset>
 </form>
