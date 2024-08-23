@@ -9,10 +9,10 @@
 </div>
 
 <div id="safety-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close-button">&times;</span>
-            <p>⚠️ Safety Warning: Please be cautious when meeting up with others to trade books. Always meet in public places and inform someone of your plans.</p>
-        </div>
+    <div class="modal-content">
+        <span id="close-modal" class="close-button">&times;</span>
+        <p>⚠️ Safety Warning: <br> <br> Please be cautious when meeting up with others to trade books. Always meet in public places and inform someone of your plans.</p>
+    </div>
 </div>
 
 {{else}}
@@ -26,4 +26,8 @@
 </div>
 {{/if}}
 
-<script src="../public/js/homepage.js"></script>
+<script src="/js/homepage.js"></script>
+
+<script>
+    const justLoggedIn = {{justLoggedIn}};
+</script>
