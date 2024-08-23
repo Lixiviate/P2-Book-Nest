@@ -4,11 +4,11 @@
     <fieldset>
 
         <label>Change username?</label>
-        <input name="Username" placeholder={{username}} aria-label="Username" autocomplete="username" />
+        <input id="username-update" name="Username" placeholder={{username}} aria-label="Username" autocomplete="username" />
         <small>I agree, this previous one sucks.</small>
 
         <label>Change email?</label>
-        <input name="Email" placeholder={{email}} aria-label="Email" autocomplete="email" />
+        <input id="email-update" name="Email" placeholder={{email}} aria-label="Email" autocomplete="email" />
         <small>We've already shared your email with everyone.</small>
 
         <label>Change password?</label>
@@ -20,3 +20,5 @@
 
     </fieldset>
 </form>
+
+<script src="./js/profile.js"></script>
