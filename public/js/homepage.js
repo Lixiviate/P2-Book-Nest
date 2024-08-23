@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    if(justLoggedIn) {
+  if (justLoggedIn) {
     const safetyModal = document.getElementById('safety-modal');
     safetyModal.style.display = 'block';
 
