@@ -25,12 +25,15 @@ router.get('/', async (req, res) => {
     });
 
     const books = dbBookData.map((book) => book.get({ plain: true }));
+    
+    const justLoggedIn = req.session.justLoggedIn || false;
+
     req.session.justLoggedIn = false;
 
     res.render('homepage', {
       books,
       loggedIn: req.session.loggedIn,
-      justLoggedIn: req.session.justLoggedIn,
+      justLoggedIn,
     });
   } catch (err) {
     console.log(err);
