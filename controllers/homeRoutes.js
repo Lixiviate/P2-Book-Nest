@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
     });
 
     const books = dbBookData.map((book) => book.get({ plain: true }));
-    
+
     const justLoggedIn = req.session.justLoggedIn || false;
 
     req.session.justLoggedIn = false;
@@ -62,7 +62,9 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/dashboard', withAuth, (req, res) => {
-  res.render('dashboard');
+  res.render('dashboard', {
+    loggedIn: req.session.loggedIn,
+  });
 });
 
 module.exports = router;
