@@ -59,4 +59,13 @@ router.get('/dashboard', withAuth, (req, res) => {
   res.render('dashboard');
 });
 
+router.get('/profile', withAuth, (req, res) => {
+  
+  res.render('profile', {
+    username: req.session.username,
+    email: req.session.email,
+  });
+  
+})
+
 module.exports = router;
