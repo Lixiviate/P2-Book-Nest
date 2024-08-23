@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
     });
 
     const books = dbBookData.map((book) => book.get({ plain: true }));
+    req.session.justLoggedIn, 
     res.render('homepage', {
       books,
       loggedIn: req.session.loggedIn,
