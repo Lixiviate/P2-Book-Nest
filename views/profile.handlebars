@@ -1,0 +1,24 @@
+<!-- Show username, email, and password boxes, each with an "update" button for updating the respective information -->
+
+<form>
+    <fieldset>
+
+        <label>Change username?</label>
+        <input id="username-update" name="Username" placeholder={{username}} aria-label="Username" autocomplete="username" />
+        <small>I agree, this previous one sucks.</small>
+
+        <label>Change email?</label>
+        <input id="email-update" name="Email" placeholder={{email}} aria-label="Email" autocomplete="email" />
+        <small>We've already shared your email with everyone.</small>
+
+        <label>Change password?</label>
+        <input type="password" name="Password" placeholder="Password" aria-label="Password"
+            autocomplete="current-password" />
+            <small>... Let me jot this down.</small>
+
+        <button type="submit">Update information</button>
+
+    </fieldset>
+</form>
+
+<script src="./js/profile.js"></script>
