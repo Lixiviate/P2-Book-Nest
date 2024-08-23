@@ -3,12 +3,12 @@ const updateUserHandler = async (event) => {
 
     const username = document.querySelector('#username-update').value.trim();
 
-    if(username) {
-        const response = await fetch('/api/profile/update', {
-            method: 'PUT',
-            body: JSON.stringify({ username }),
-            headers: { 'Content-Type': 'application/json' },
-        });
+  if (username) {
+    const response = await fetch('/api/profile/update', {
+      method: 'PUT',
+      body: JSON.stringify({ username }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
         if (response.ok) {
             document.location.replace('/profile');
@@ -23,19 +23,19 @@ const updateEmailHandler = async (event) => {
     
     const email = document.querySelector('#password-update').value.trim();
 
-    if(email) {
-        const response = await fetch('/api/profile/update', {
-            method: 'PUT',
-            body: JSON.stringify({ email }),
-            headers: { 'Content-Type': 'application/json' },
-        });
+  if (email) {
+    const response = await fetch('/api/profile/update', {
+      method: 'PUT',
+      body: JSON.stringify({ email }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-        if (response.ok) {
-            document.location.replace('/profile');
-        } else {
-            alert('Failed to update');
-        }
-    };
+    if (response.ok) {
+      document.location.replace('/profile');
+    } else {
+      alert('Failed to update');
+    }
+  }
 };
 
 const updatePassHandler = async (event) => {
