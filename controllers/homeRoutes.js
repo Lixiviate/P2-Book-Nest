@@ -70,10 +70,11 @@ router.get('/dashboard', withAuth, (req, res) => {
 router.get('/profile', withAuth, (req, res) => {
   
   res.render('profile', {
+    loggedIn: req.session.loggedIn,
     username: req.session.username,
     email: req.session.email,
   });
-  
+
 })
 
 module.exports = router;
