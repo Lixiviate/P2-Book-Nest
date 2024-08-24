@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 router.put('/username-update', async (req, res) => {
     try {
 
-        console.log(`username value is ${req.body.username}`);
         //Check if username already exists
         const userExists = await User.findOne({
             where: {
@@ -14,14 +13,12 @@ router.put('/username-update', async (req, res) => {
         });
 
         if(userExists) {
-
-            console.log('userExists dot ok');
+            res
+            .status(400)
+            .json({ message: 'This username already exists.' });
             return;
-            
         } else {
-
-            console.log('userExists not ok');
-            
+            // Update username to what was entered in the form
             const updateUsername = await User.update(
                 {
                     username: req.body.username,
@@ -33,8 +30,7 @@ router.put('/username-update', async (req, res) => {
                 }
             );
 
-            console.log('after updateUsername');
-
+            // If the update went well, make sure to update the session object so when the page refreshes the form has the correct default value.
             if(updateUsername) {
                 req.session.save(() => {
                     req.session.username = req.body.username;
@@ -52,5 +48,52 @@ router.put('/username-update', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.put('/email-update', async (req, res) => {
+    try {
+
+        //Check if username already exists
+        const emailExists = await User.findOne({
+            where: {
+                email: req.body.email,
+            },
+        });
+
+        if(emailExists) {
+            res
+            .status(400)
+            .json({ message: 'This email already exists.' });
+            return;
+        } else {
+            // Update username to what was entered in the form
+            const updateEmail = await User.update(
+                {
+                    email: req.body.email,
+                },
+                {
+                    where: {
+                        email: req.session.email,
+                    },
+                }
+            );
+
+            // If the update went well, make sure to update the session object so when the page refreshes the form has the correct default value.
+            if(updateEmail) {
+                req.session.save(() => {
+                    req.session.email = req.body.email;
+                });
+
+                res.render('profile', {
+                    username: req.session.username,
+                    email: req.session.email,
+                  });
+            };
+        };
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;

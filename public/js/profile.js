@@ -10,13 +10,11 @@ const updateUserHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    console.log('test');
-
         if (response.ok) {
-            console.log('Groovy, baby!');
+            alert('Username changed!');
             document.location.replace('/profile');
         } else {
-            alert('Failed to update username');
+            alert('This username is not available.');
         }
     };
 
@@ -34,12 +32,13 @@ const updateEmailHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    if (response.ok) {
-      document.location.replace('/profile');
-    } else {
-      alert('Failed to update');
-    }
-  }
+        if (response.ok) {
+            alert('Email changed!');
+            document.location.replace('/profile');
+        } else {
+            alert('This email is not available.');
+        }
+    };
 };
 
 const updatePassHandler = async (event) => {
@@ -65,3 +64,7 @@ const updatePassHandler = async (event) => {
 document
     .querySelector('.username-form')
     .addEventListener('submit', updateUserHandler);
+
+document
+    .querySelector('.email-form')
+    .addEventListener('submit', updateEmailHandler);
