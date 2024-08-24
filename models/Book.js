@@ -44,9 +44,8 @@ Book.init(
     },
   },
   {
-    // Link to database connection
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'book',

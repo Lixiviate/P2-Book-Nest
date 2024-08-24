@@ -35,19 +35,54 @@ function displayResults(books) {
 
   books.forEach((book) => {
     resultsContainer.innerHTML += `
-      <div style="display: flex; align-items: center;">
+      <div class="book-item" style="display: flex; align-items: center; margin-bottom: 20px;">
         <img src="${book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'https://via.placeholder.com/150'}" alt="${book.title} cover" style="width: 100px; margin-right: 15px;">
         <div>
-          <h2><a href="https://openlibrary.org${book.key}" target="_blank">${book.title}</a></h2>
-          <p>Author: ${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
+          <h2 class="book-title"><a href="https://openlibrary.org${book.key}" target="_blank">${book.title}</a></h2>
+          <p class="book-author">Author: ${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
+          <p class="book-description">${book.description || 'No description available'}</p>
+          <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
         </div>
       </div>
     `;
   });
-}
 
+  document.querySelectorAll('.add-to-library').forEach((button) => {
+    button.addEventListener('click', addToLibrary);
+  });
+}
+async function addToLibrary(event) {
+  const bookElement = event.target.closest('.book-item');
+  const bookData = {
+    title: bookElement.querySelector('.book-title').textContent,
+    author: bookElement
+      .querySelector('.book-author')
+      .textContent.replace('Author: ', ''),
+    desc: bookElement.querySelector('.book-description').textContent,
+    cover_img: bookElement.querySelector('img').src,
+    status: 'Available',
+    isbn: event.target.dataset.isbn,
+  };
+
+  try {
+    const response = await fetch('/api/books', {
+      method: 'POST',
+      body: JSON.stringify(bookData),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      alert('Book added to your library!');
+    } else {
+      alert('Failed to add book to library');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while adding the book');
+  }
+}
 async function displayISBNResult(book) {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.innerHTML = '';
