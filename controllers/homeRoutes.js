@@ -73,6 +73,18 @@ router.get('/profile', withAuth, (req, res) => {
     username: req.session.username,
     email: req.session.email,
   });
+
+});
+
+router.get('/users', async (req, res) => {
+  const response = await User.findAll({
+    attributes: {
+      exclude: [
+        'password',
+      ],
+    },
+  });
+  res.json(response);
 });
 
 module.exports = router;
