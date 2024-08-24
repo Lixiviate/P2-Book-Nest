@@ -77,12 +77,14 @@ router.get('/profile', withAuth, (req, res) => {
 });
 
 router.get('/users', async (req, res) => {
-  const response = await User.findAll();
-  if(!response.ok) {
-    res.json('it broke');
-  } else {
-    res.json(response);
-  }
+  const response = await User.findAll({
+    attributes: {
+      exclude: [
+        'password',
+      ],
+    },
+  });
+  res.json(response);
 });
 
 module.exports = router;
