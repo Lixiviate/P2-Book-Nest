@@ -1,24 +1,42 @@
 <!-- Show username, email, and password boxes, each with an "update" button for updating the respective information -->
 
-<form>
+<form  class="username-form">
     <fieldset>
 
-        <label>Change username?</label>
-        <input id="username-update" name="Username" placeholder={{username}} aria-label="Username" autocomplete="username" />
-        <small>I agree, this previous one sucks.</small>
-
-        <label>Change email?</label>
-        <input id="email-update" name="Email" placeholder={{email}} aria-label="Email" autocomplete="email" />
-        <small>We've already shared your email with everyone.</small>
-
-        <label>Change password?</label>
-        <input type="password" name="Password" placeholder="Password" aria-label="Password"
-            autocomplete="current-password" />
-            <small>... Let me jot this down.</small>
-
-        <button type="submit">Update information</button>
+        <input id="username-update" type="username" name="Username" placeholder={{username}} aria-label="Username"
+            autocomplete="username" />
+        <div class="grid">
+            <div>{{username-message}}</div>
+            <button id="user-submit" type="submit">Update username</button>
+        </div>
 
     </fieldset>
 </form>
 
-<script src="./js/profile.js"></script>
+<form class="email-form">
+    <fieldset>
+
+        <input id="email-update" type="email" name="Email" placeholder={{email}} aria-label="Email"
+            autocomplete="email" />
+        <div class="grid">
+            <div>{{email-message}}</div>
+            <button id="email-submit" type="submit">Update email</button>
+        </div>
+
+    </fieldset>
+</form>
+
+<form class="pass-form">
+    <fieldset>
+
+        <input id="password-update" type="password" name="Password" placeholder="Password" aria-label="Password"
+            autocomplete="current-password" />
+        <div class="grid">
+            <div>{{password-message}}</div>
+            <button id="password-submit" type="submit">Update password</button>
+        </div>        
+
+    </fieldset>
+</form>
+
+<script src="/js/profile.js"></script>
