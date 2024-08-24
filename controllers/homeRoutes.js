@@ -87,4 +87,9 @@ router.get('/users', async (req, res) => {
   res.json(response);
 });
 
+router.get('/books', async (req, res) => {
+  const response = await Book.findAll({});
+  res.json(response);
+});
+
 module.exports = router;
