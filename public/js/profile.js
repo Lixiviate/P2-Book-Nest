@@ -41,22 +41,23 @@ const updateEmailHandler = async (event) => {
     };
 };
 
-const updatePassHandler = async (event) => {
+const updatePasswordHandler = async (event) => {
     event.preventDefault();
     
-    const pass = document.querySelector('#password-update').value.trim();
+    const password = document.querySelector('#password-update').value.trim();
 
-    if(pass) {
-        const response = await fetch('/api/profile/pass-update', {
-            method: 'PUT',
-            body: JSON.stringify({ pass }),
-            headers: { 'Content-Type': 'application/json' },
-        });
+  if (password) {
+    const response = await fetch('/api/profile/password-update', {
+      method: 'PUT',
+      body: JSON.stringify({ password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
         if (response.ok) {
+            alert('Password changed!');
             document.location.replace('/profile');
         } else {
-            alert('Failed to update');
+            alert('This password is already in use by horizonbound0');
         }
     };
 };
@@ -68,3 +69,7 @@ document
 document
     .querySelector('.email-form')
     .addEventListener('submit', updateEmailHandler);
+
+document
+    .querySelector('.pass-form')
+    .addEventListener('submit', updatePasswordHandler);
