@@ -62,6 +62,17 @@ const updatePasswordHandler = async (event) => {
     };
 };
 
+const bookStatusHandler = async (event) => {
+    event.preventDefault();
+
+    const target = event.currentTarget;
+
+    // grab elements
+    const bookISBN = target.dataset.isbn;
+
+    console.log(bookISBN);
+};
+
 document
     .querySelector('.username-form')
     .addEventListener('submit', updateUserHandler);
@@ -73,3 +84,7 @@ document
 document
     .querySelector('.pass-form')
     .addEventListener('submit', updatePasswordHandler);
+
+document
+    .querySelector('.book-form')
+    .addEventListener('submit', bookStatusHandler);
