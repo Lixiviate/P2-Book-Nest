@@ -43,8 +43,10 @@ function displayResults(books) {
           <p class="book-author">Author: ${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
-          <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
-          <button class="add-to-wishlist" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Wishlist</button>
+          <div class ="button-group"> 
+            <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
+            <button class="add-to-wishlist" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Wishlist</button>
+          </div>
         </div>
       </div>
     `;
