@@ -1,5 +1,9 @@
-<h2>Profile Information:</h2>
-<section>
+
+<div class="profile-container">
+    <aside class="profile-info">
+
+    <h2>Profile Information:</h2>
+    <section>
 
     <form class="username-form">
         <fieldset>
@@ -10,42 +14,42 @@
                 <div>{{username-message}}</div>
                 <button id="user-submit" type="submit">Update username</button>
             </div>
-
         </fieldset>
     </form>
 
     <form class="email-form">
         <fieldset>
-
             <input id="email-update" type="email" name="Email" placeholder={{email}} aria-label="Email"
                 autocomplete="email" />
             <div class="grid">
                 <div>{{email-message}}</div>
                 <button id="email-submit" type="submit">Update email</button>
             </div>
-
         </fieldset>
     </form>
 
     <form class="pass-form">
         <fieldset>
-
             <input id="password-update" type="password" name="Password" placeholder="Password" aria-label="Password"
                 autocomplete="current-password" />
             <div class="grid">
                 <div>{{password-message}}</div>
                 <button id="password-submit" type="submit">Update password</button>
             </div>
-
         </fieldset>
     </form>
+    </section>
+</aside>
 
-</section>
-<h2>Your Books:</h2>
-<section class="grid">
-    {{#each books as |book|}}
-        {{>profile-books}}
-    {{/each}}
-</section>
+    <div class="book-section">
+        <h2>Your Books:</h2>
+        <section class="grid">
+            {{#each books as |book|}}
+                {{>profile-books}}
+            {{/each}}
+        </section>
+    </div>
+</div>
+
 
 <script src="/js/profile.js"></script>
