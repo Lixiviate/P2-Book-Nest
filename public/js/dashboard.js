@@ -44,6 +44,7 @@ function displayResults(books) {
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
           <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
+          <button class="add-to-wishlist" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Wishlist</button>
         </div>
       </div>
     `;
@@ -52,7 +53,12 @@ function displayResults(books) {
   document.querySelectorAll('.add-to-library').forEach((button) => {
     button.addEventListener('click', addToLibrary);
   });
+
+  document.querySelectorAll('.add-to-wishlist').forEach((button) => {
+    button.addEventListener('click', addToWishlist);
+  });
 }
+
 async function addToLibrary(event) {
   const bookElement = event.target.closest('.book-item');
   const bookData = {
@@ -82,6 +88,35 @@ async function addToLibrary(event) {
     alert('An error occurred while adding the book');
   }
 }
+
+async function addToWishlist(event) {
+  const bookElement = event.target.closest('.book-item');
+  const bookData = {
+    title: bookElement.querySelector('.book-title').textContent,
+    author: bookElement
+      .querySelector('.book-author')
+      .textContent.replace('Author: ', ''),
+    isbn: event.target.dataset.isbn,
+  };
+
+  try {
+    const response = await fetch('/api/wishlist', {
+      method: 'POST',
+      body: JSON.stringify(bookData),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      alert('Book added to your wishlist!');
+    } else {
+      alert('Failed to add book to wishlist');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while adding the book to your wishlist');
+  }
+}
+
 async function displayISBNResult(book) {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.innerHTML = '';
