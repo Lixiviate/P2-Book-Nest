@@ -34,6 +34,7 @@ function displayResults(books) {
   resultsContainer.innerHTML = books.length ? '' : '<p>No results found</p>';
 
   books.forEach((book) => {
+
     resultsContainer.innerHTML += `
       <div class="book-item" style="display: flex; align-items: center; margin-bottom: 20px;">
         <img src="${book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'https://via.placeholder.com/150'}" alt="${book.title} cover" style="width: 100px; margin-right: 15px;">
@@ -42,7 +43,6 @@ function displayResults(books) {
           <p class="book-author">Author: ${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
-          <p class="book-description">${book.description || 'No description available'}</p>
           <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
         </div>
       </div>
@@ -60,7 +60,6 @@ async function addToLibrary(event) {
     author: bookElement
       .querySelector('.book-author')
       .textContent.replace('Author: ', ''),
-    desc: bookElement.querySelector('.book-description').textContent,
     cover_img: bookElement.querySelector('img').src,
     status: 'Available',
     isbn: event.target.dataset.isbn,
@@ -106,7 +105,6 @@ async function displayISBNResult(book) {
         <p>ISBN-13: ${book.isbn_13?.join(', ') || 'N/A'}</p>
         <p>ISBN-10: ${book.isbn_10?.join(', ') || 'N/A'}</p>
         <p>Pages: ${book.number_of_pages || 'Unknown'}</p>
-        <p>Description: ${book.description?.value || 'No description available'}</p>
       </div>
     </div>
   `;
