@@ -431,8 +431,9 @@ label {
 .profile-container {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 50px;
+  padding: 20px;
+  text-align: center;
 }
 
 .profile-info {
@@ -445,11 +446,10 @@ label {
 .books-section {
   display: flex;
   flex-direction: column;
-}
-
-.books-section {
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .grid {
@@ -459,24 +459,50 @@ label {
 }
 
 .book-card {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   border-radius: 8px;
+  border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  padding: 1rem;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: grid;
   text-align: center;
 }
 
 .book-card img {
   max-width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
 .book-card h3 {
   color: #84786c;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin: 0 0 10px;
+}
+
+.book-card p {
+  margin: 5px 0;
+}
+
+.book-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.available-status {
+  background-color: #cb7e4b;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.available-status:hover {
+  background-color: #6c8184;
 }
 
 
