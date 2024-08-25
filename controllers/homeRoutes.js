@@ -67,8 +67,25 @@ router.get('/dashboard', withAuth, (req, res) => {
   });
 });
 
-router.get('/profile', withAuth, (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
+  // pull the user's list of books
+  const userBookData = await Book.findAll({
+    where: {
+      user_id: req.session.user_id,
+    },
+  });
+
+  // Stop if no books.
+  if (!userBookData) {
+    res.status(404).json({ message: 'User does not have any books.' });
+  }
+
+  // simplify books
+  const userBooks = userBookData.map((book) =>
+  book.get({ plain: true }));
+
   res.render('profile', {
+    books: userBooks,
     loggedIn: req.session.loggedIn,
     username: req.session.username,
     email: req.session.email,

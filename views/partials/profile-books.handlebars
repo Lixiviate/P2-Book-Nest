@@ -1,0 +1,14 @@
+<details>
+    <summary role="button" class="secondary">{{title}}</summary>
+    <form class="book-form" data-isbn={{isbn}}>
+        <p>
+            <img src={{cover_img}} alt={{title}}>
+            <p>by: {{author}}</p>
+            <p>ISBN: {{isbn}}</p>
+            <div class="grid book-details">
+                <p>Status: {{status}}</p>
+                <button class="available-status" type="submit">Change status?</button>
+            </div>
+        </p>
+    </form>
+</details>
