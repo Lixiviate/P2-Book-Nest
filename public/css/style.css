@@ -22,10 +22,12 @@ header {
   text-align: center;
   width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 4px solid #cb7e4b;
 }
 
 header h1 {
   font-size: 1.8rem;
+  margin: 0;
 }
 
 .logo-text-box {
@@ -57,9 +59,15 @@ header h1 {
 }
 
 header nav {
+  font-family: 'Roboto', sans-serif;
   display: flex;
   gap: 1.5 rem;
   margin-left: auto;
+  background: linear-gradient(145deg, #8e725d, #6f5a48); 
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px; 
+  border: 0.5px solid #7e5f5041;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 header nav a {
@@ -67,12 +75,16 @@ header nav a {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3 ease;
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 header nav a:hover {
   background-color: #cb7e4b;
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .book-part {
