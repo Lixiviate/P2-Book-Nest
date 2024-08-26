@@ -81,8 +81,7 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 
   // simplify books
-  const userBooks = userBookData.map((book) =>
-  book.get({ plain: true }));
+  const userBooks = userBookData.map((book) => book.get({ plain: true }));
 
   res.render('profile', {
     books: userBooks,
@@ -90,15 +89,12 @@ router.get('/profile', withAuth, async (req, res) => {
     username: req.session.username,
     email: req.session.email,
   });
-
 });
 
 router.get('/users', async (req, res) => {
   const response = await User.findAll({
     attributes: {
-      exclude: [
-        'password',
-      ],
+      exclude: ['password'],
     },
   });
   res.json(response);
