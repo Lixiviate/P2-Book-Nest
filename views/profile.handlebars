@@ -1,65 +1,66 @@
+<div class="profile-layout">
+  <div class="left-panel">
+    <aside class="profile-container">
+      <h2>Profile Information:</h2>
+      <section>
+                <form class="username-form">
+                    <fieldset>
 
-<div class="profile-container">
-    <aside class="profile-info">
+                        <input id="username-update" type="username" name="Username" placeholder={{username}} aria-label="Username"
+                            autocomplete="username" />
+                        <div class="grid">
+                            <div>{{username-message}}</div>
+                            <button id="user-submit" type="submit">Update username</button>
+                        </div>
+                    </fieldset>
+                </form>
 
-    <h2>Profile Information:</h2>
-    <section>
+                <form class="email-form">
+                    <fieldset>
+                        <input id="email-update" type="email" name="Email" placeholder={{email}} aria-label="Email"
+                            autocomplete="email" />
+                        <div class="grid">
+                            <div>{{email-message}}</div>
+                            <button id="email-submit" type="submit">Update email</button>
+                        </div>
+                    </fieldset>
+                </form>
 
-    <form class="username-form">
-        <fieldset>
+                <form class="pass-form">
+                    <fieldset>
+                        <input id="password-update" type="password" name="Password" placeholder="Password" aria-label="Password"
+                            autocomplete="current-password" />
+                        <div class="grid">
+                            <div>{{password-message}}</div>
+                            <button id="password-submit" type="submit">Update password</button>
+                        </div>
+                    </fieldset>
+                </form>
+        </section>
+    </aside>
+  </div>
 
-            <input id="username-update" type="username" name="Username" placeholder={{username}} aria-label="Username"
-                autocomplete="username" />
+
+    <div class="right-panel">
+
+    <section class="books-section">
+        <h2>Your Books:</h2>
             <div class="grid">
-                <div>{{username-message}}</div>
-                <button id="user-submit" type="submit">Update username</button>
+                {{#each books as |book|}}
+                    {{> profile-books}}
+                {{/each}}
             </div>
-        </fieldset>
-    </form>
-
-    <form class="email-form">
-        <fieldset>
-            <input id="email-update" type="email" name="Email" placeholder={{email}} aria-label="Email"
-                autocomplete="email" />
-            <div class="grid">
-                <div>{{email-message}}</div>
-                <button id="email-submit" type="submit">Update email</button>
-            </div>
-        </fieldset>
-    </form>
-
-    <form class="pass-form">
-        <fieldset>
-            <input id="password-update" type="password" name="Password" placeholder="Password" aria-label="Password"
-                autocomplete="current-password" />
-            <div class="grid">
-                <div>{{password-message}}</div>
-                <button id="password-submit" type="submit">Update password</button>
-            </div>
-        </fieldset>
-    </form>
     </section>
-</aside>
 
-</section>
-
-
-<section class="books-section">
-    <h2>Your Books:</h2>
-        <div class="grid">
-            {{#each books as |book|}}
-                {{> profile-books}}
-            {{/each}}
-        </div>
-</section>
-
-<section class="books-section">
-    <h2>Your Wishlist:</h2>
-       <div class="grid">
-            {{#each wishlist as |item|}}
-                {{> profile-wishlist item=item.book}}
-            {{/each}}
-        </div>
-</section>
+    <section class="wishlist-section">
+        <h2>Your Wishlist:</h2>
+            <div class="grid">
+                {{#each wishlist as |item|}}
+                    {{> profile-wishlist item=item.book}}
+                {{/each}}
+            </div>
+    </section>
+    </div>
+</div>
 
 <script src="/js/profile.js"></script>

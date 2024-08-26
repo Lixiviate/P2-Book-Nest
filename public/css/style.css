@@ -445,12 +445,41 @@ label {
   transform: translateY(-2px);
 }
 
-.profile-container {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 50px;
+
+.profile-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
   padding: 20px;
-  text-align: center;
+}
+
+
+.left-panel {
+  width: 100%;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20x;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.profile-container {
+  gap: 20px;
+  width: 80%;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-info {
@@ -460,26 +489,18 @@ label {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.books-section {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+
+.books-section, .wishlist-section {
   background-color: #ffffff;
+  text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: stretch;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .book-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
   width: 100%;
   max-width: 300px;
   padding: 1rem;
@@ -513,7 +534,7 @@ label {
   flex-grow: 1;
 }
 
-.available-status {
+.change-status {
   justify-content: center;
   background-color: #cb7e4b;
   color: white;
@@ -524,7 +545,7 @@ label {
   transition: background-color 0.3s ease;
 }
 
-.available-status:hover {
+.change-status:hover {
   background-color: #6c8184;
 }
 
@@ -561,6 +582,14 @@ footer {
 
   main {
     padding: 2rem;
+  }
+  
+.profile-layout {
+    flex-direction: column;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
   }
 }
 
