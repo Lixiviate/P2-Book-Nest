@@ -34,7 +34,6 @@ function displayResults(books) {
   resultsContainer.innerHTML = books.length ? '' : '<p>No results found</p>';
 
   books.forEach((book) => {
-
     resultsContainer.innerHTML += `
       <div class="book-item" style="display: flex; align-items: center; margin-bottom: 20px;">
         <img src="${book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'https://via.placeholder.com/150'}" alt="${book.title} cover" style="width: 100px; margin-right: 15px;">

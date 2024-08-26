@@ -1,15 +1,17 @@
 <details>
     <summary role="button" class="secondary">{{title}}</summary>
+    <div class='book-card'>
     <form class="book-form" data-isbn="{{isbn}}" data-book-id="{{id}}">
-        <p>
-            <img src="{{cover_img}}" alt="{{title}}">
-            <p>by: {{author}}</p>
-            <p>ISBN: {{isbn}}</p>
-            <div class="grid book-details">
-                <p>Status: {{status}}</p>
-                <button class="available-status" type="submit">Change status?</button>
-                <button class="remove-from-library" type="button">Remove from Library</button>
-            </div>
-        </p>
-    </form>
+      <img src='{{cover_img}}' alt='Cover of {{title}}' />
+       <div>
+         <p>by: {{author}}</p>
+          <p>ISBN: {{isbn}}</p>
+         <div class='grid book-details'>
+            <p class='book-status'>Status: {{status}}</p>
+             <button class="available-status" type="submit">Change status?</button>
+             <button class="remove-from-library" type="button">Remove from Library</button>
+        </div>
+      </div>     
+     </form>
+  </div>
 </details>
