@@ -67,35 +67,36 @@ router.get('/dashboard', withAuth, (req, res) => {
   });
 });
 
-
 // GET profile page with user's books and wishlist
 router.get('/profile', withAuth, async (req, res) => {
   try {
-  
-  const userBookData = await Book.findAll({
-    where: {
-      user_id: req.session.user_id,
-    },
-  });
+    const userBookData = await Book.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
 
-  const userBooks = userBookData.map((book) => book.get({ plain: true }));
+    if (!userBookData) {
+      res.status(404).json({ message: 'User does not have any books.' });
+      return;
+    }
 
+    const userBooks = userBookData.map((book) => book.get({ plain: true }));
 
-  // Fetch the user's wishlist
-  const wishlistData = await Wishlist.findAll({
-    where: {
-    user_id: req.session.user_id,
-    },
-    include: [{ model: Book }],
-  });
+    // Fetch the user's wishlist
+    const wishlistData = await Wishlist.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      include: [{ model: Book }],
+    });
 
-  
-  const wishlistItems = wishlistData.map((item) => item.get({ plain: true }));
-    
+    const wishlistItems = wishlistData.map((item) => item.get({ plain: true }));
+
     // Render profile with books and wishlist
     res.render('profile', {
       books: userBooks,
-      wishlist: wishlistItems, // Add wishlist items to the profile
+      wishlist: wishlistItems,
       loggedIn: req.session.loggedIn,
       username: req.session.username,
       email: req.session.email,
@@ -106,13 +107,11 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
-  // GET all users (exclude passwords)
+// GET all users (exclude passwords)
 router.get('/users', async (req, res) => {
   const response = await User.findAll({
     attributes: {
-      exclude: [
-        'password',
-      ],
+      exclude: ['password'],
     },
   });
   res.json(response);

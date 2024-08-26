@@ -71,6 +71,7 @@ async function addToLibrary(event) {
     cover_img: bookElement.querySelector('img').src,
     status: 'Available',
     isbn: event.target.dataset.isbn,
+    book_id: event.target.dataset.bookId || null,
   };
 
   try {

@@ -1,6 +1,7 @@
 const User = require('./User');
 const Book = require('./Book');
 const Holder = require('./Holder');
+const Wishlist = require('./Wishlist');
 
 // User/Book association (Ownership)
 User.hasMany(Book, {
@@ -29,4 +30,21 @@ User.hasMany(Holder, {
   foreignKey: 'user_id',
 });
 
-module.exports = { User, Book, Holder };
+// User/Wishlist association (Wishlist)
+Wishlist.belongsTo(User, {
+  foreignKey: 'user_id',
+});
+
+Wishlist.belongsTo(Book, {
+  foreignKey: 'book_id',
+});
+
+User.hasMany(Wishlist, {
+  foreignKey: 'user_id',
+});
+
+Book.hasMany(Wishlist, {
+  foreignKey: 'book_id',
+});
+
+module.exports = { User, Book, Holder, Wishlist };

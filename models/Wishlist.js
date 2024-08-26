@@ -11,17 +11,19 @@ Wishlist.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
+    book_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: 'user',
+        model: 'book',
         key: 'id',
       },
     },
-    book_id: {
+    user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: 'book',
+        model: 'user',
         key: 'id',
       },
     },
