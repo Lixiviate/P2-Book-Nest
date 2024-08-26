@@ -72,8 +72,10 @@ async function addToLibrary(event) {
     isbn: event.target.dataset.isbn,
   };
 
+  console.log('Sending book data:', bookData);
+  
   try {
-    const response = await fetch('/api/books/library', {
+    const response = await fetch('/api/books', {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: { 'Content-Type': 'application/json' },
