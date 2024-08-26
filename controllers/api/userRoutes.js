@@ -8,9 +8,9 @@ router.post('/signup', async (req, res) => {
   try {
     // Enforce password length validation
     if (req.body.password.length < 8) {
-      return res.status(400).json({
-        message: 'Password must be at least 8 characters long.',
-      });
+      return res
+        .status(400)
+        .json({ message: 'Password must be at least 8 characters long.' });
     }
     const userData = await User.create({
       username: req.body.username,

@@ -2,13 +2,12 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 
+// Update username
 router.put('/username-update', async (req, res) => {
   try {
     //Check if username already exists
     const userExists = await User.findOne({
-      where: {
-        username: req.body.username,
-      },
+      where: { username: req.body.username },
     });
 
     if (userExists) {
@@ -17,17 +16,10 @@ router.put('/username-update', async (req, res) => {
     } else {
       // Update username to what was entered in the form
       const updateUsername = await User.update(
-        {
-          username: req.body.username,
-        },
-        {
-          where: {
-            username: req.session.username,
-          },
-        },
+        { username: req.body.username },
+        { where: { username: req.session.username } },
       );
 
-      // If the update went well, make sure to update the session object so when the page refreshes the form has the correct default value.
       if (updateUsername) {
         req.session.save(() => {
           req.session.username = req.body.username;
@@ -49,9 +41,7 @@ router.put('/email-update', async (req, res) => {
   try {
     //Check if email already exists
     const emailExists = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
+      where: { email: req.body.email },
     });
 
     if (emailExists) {
@@ -60,14 +50,8 @@ router.put('/email-update', async (req, res) => {
     } else {
       // Update email to what was entered in the form
       const updateEmail = await User.update(
-        {
-          email: req.body.email,
-        },
-        {
-          where: {
-            email: req.session.email,
-          },
-        },
+        { email: req.body.email },
+        { where: { email: req.session.email } },
       );
 
       // If the update went well, make sure to update the session object so when the page refreshes the form has the correct default value.
@@ -92,9 +76,7 @@ router.put('/password-update', async (req, res) => {
   try {
     // grab the current user to get their password object for bcrypt.compare
     const currentUser = await User.findOne({
-      where: {
-        username: req.session.username,
-      },
+      where: { username: req.session.username },
     });
 
     const userSimple = currentUser.get({ plain: true });
@@ -105,20 +87,13 @@ router.put('/password-update', async (req, res) => {
     );
 
     if (validPassword) {
-      res.status(400).json({ message: 'Cannot user current password.' });
+      res.status(400).json({ message: 'Cannot use current password.' });
       return;
     } else {
       // Update password to what was entered in the form, and make sure to let sequelize know to listen to the hooks in the model.
       const updatePassword = await User.update(
-        {
-          password: req.body.password,
-        },
-        {
-          where: {
-            username: req.session.username,
-          },
-          individualHooks: true,
-        },
+        { password: req.body.password },
+        { where: { username: req.session.username }, individualHooks: true },
       );
 
       // Refresh the page so the username form is blank again.
