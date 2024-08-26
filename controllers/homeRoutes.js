@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Book, Holder } = require('../models');
+const { User, Book, Holder, Wishlist } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET all books for homepage
@@ -67,32 +67,46 @@ router.get('/dashboard', withAuth, (req, res) => {
   });
 });
 
+
+// GET profile page with user's books and wishlist
 router.get('/profile', withAuth, async (req, res) => {
-  // pull the user's list of books
+  try {
+  
   const userBookData = await Book.findAll({
     where: {
       user_id: req.session.user_id,
     },
   });
 
-  // Stop if no books.
-  if (!userBookData) {
-    res.status(404).json({ message: 'User does not have any books.' });
-  }
+  const userBooks = userBookData.map((book) => book.get({ plain: true }));
 
-  // simplify books
-  const userBooks = userBookData.map((book) =>
-  book.get({ plain: true }));
 
-  res.render('profile', {
-    books: userBooks,
-    loggedIn: req.session.loggedIn,
-    username: req.session.username,
-    email: req.session.email,
+  // Fetch the user's wishlist
+  const wishlistData = await Wishlist.findAll({
+    where: {
+    user_id: req.session.user_id,
+    },
+    include: [{ model: Book }],
   });
 
+  
+  const wishlistItems = wishlistData.map((item) => item.get({ plain: true }));
+    
+    // Render profile with books and wishlist
+    res.render('profile', {
+      books: userBooks,
+      wishlist: wishlistItems, // Add wishlist items to the profile
+      loggedIn: req.session.loggedIn,
+      username: req.session.username,
+      email: req.session.email,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
+  // GET all users (exclude passwords)
 router.get('/users', async (req, res) => {
   const response = await User.findAll({
     attributes: {
@@ -104,6 +118,7 @@ router.get('/users', async (req, res) => {
   res.json(response);
 });
 
+// GET all books
 router.get('/books', async (req, res) => {
   const response = await Book.findAll({});
   res.json(response);
