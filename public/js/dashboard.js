@@ -71,7 +71,6 @@ async function addToLibrary(event) {
     cover_img: bookElement.querySelector('img').src,
     status: 'Available',
     isbn: event.target.dataset.isbn,
-    book_id: event.target.dataset.bookId || null,
   };
 
   try {
@@ -99,11 +98,14 @@ async function addToWishlist(event) {
     author: bookElement
       .querySelector('.book-author')
       .textContent.replace('Author: ', ''),
+    cover_img: bookElement.querySelector('img').src,
     isbn: event.target.dataset.isbn,
   };
 
+  console.log('Book data being sent:', bookData);
+
   try {
-    const response = await fetch('/api/wishlist', {
+    let response = await fetch(`/api/books/`, {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: { 'Content-Type': 'application/json' },
@@ -116,7 +118,7 @@ async function addToWishlist(event) {
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred while adding the book to your wishlist');
+    alert('An error occurred while adding the book to wishlist');
   }
 }
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book, Wishlist } = require('../../models');
+const { Book } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get route for a specific book owner
@@ -32,20 +32,21 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// post route for adding book to the wishlist
-
-router.post('/wishlist', withAuth, async (req, res) => {
+// Check if a book exists by ISBN
+router.post('/check', withAuth, async (req, res) => {
   try {
-    const { book_id } = req.body;
-
-    const wishlistItem = await Wishlist.create({
-      user_id: req.session.user_id,
-      book_id,
+    const book = await Book.findOne({
+      where: { isbn: req.body.isbn },
     });
 
-    res.status(200).json({ message: 'Book added to wishlist!', wishlistItem });
+    if (book) {
+      res.status(200).json({ exists: true, book_id: book.id });
+    } else {
+      res.status(200).json({ exists: false });
+    }
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ message: 'Failed to check book existence' });
   }
 });
 
