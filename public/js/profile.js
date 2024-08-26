@@ -63,14 +63,55 @@ const updatePasswordHandler = async (event) => {
 
 const bookStatusHandler = async (event) => {
   event.preventDefault();
+  console.log('Button clicked');
 
-  const target = event.currentTarget;
+  if (event.target.matches('.change-status')) {
+    const button = event.target;
+    const id = button.getAttribute('data-id');
+    const currentStatus = button.getAttribute('data-status');
+    const newStatus =
+      currentStatus === 'Available' ? 'Not Available' : 'Available';
 
-  // grab elements
-  const bookISBN = target.dataset.isbn;
+    console.log('Sending fetch request to:', `/api/books/${id}`);
+    console.log('Request body:', JSON.stringify({ status: newStatus }));
 
-  console.log(bookISBN);
+    try {
+      const response = await fetch(`/api/books/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ status: newStatus }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      console.log('Response status:', response.status);
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+
+      if (response.ok) {
+        console.log('Status updated successfully');
+        button.textContent = `Change status (${newStatus})`;
+        button.setAttribute('data-status', newStatus);
+
+        const statusElement = button
+          .closest('.book-card')
+          .querySelector('.book-status');
+        if (statusElement) {
+          statusElement.textContent = `Status: ${newStatus}`;
+        }
+      } else {
+        console.error('Failed to update book status');
+      }
+    } catch (error) {
+      console.error('Error during fetch:', error);
+    }
+  }
 };
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded');
+  document.querySelectorAll('.change-status').forEach((button) => {
+    console.log('Attaching event listener to button');
+    button.addEventListener('click', bookStatusHandler);
+  });
+});
 
 document
   .querySelector('.username-form')
@@ -83,7 +124,3 @@ document
 document
   .querySelector('.pass-form')
   .addEventListener('submit', updatePasswordHandler);
-
-document
-  .querySelector('.book-form')
-  .addEventListener('submit', bookStatusHandler);
