@@ -74,7 +74,7 @@ async function addToLibrary(event) {
   };
 
   try {
-    const response = await fetch('/api/books', {
+    const response = await fetch('/api/books/library', {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: { 'Content-Type': 'application/json' },
@@ -120,18 +120,14 @@ async function addToWishlist(event) {
       // If the book exists, get its ID
       bookId = result.book_id;
     } else {
-      // If the book doesn't exist in the library, create a new book record but don't add it to the library
-      response = await fetch('/api/books', {
+      // Create a new book record only if it doesn't exist
+      response = await fetch('/api/books/wishlist', {
         method: 'POST',
-        body: JSON.stringify({
-          ...bookData,
-          status: 'Wishlist', // Set a specific status for wishlist items, if necessary
-        }),
+        body: JSON.stringify(bookData),
         headers: { 'Content-Type': 'application/json' },
       });
 
-      if (!response.ok)
-        throw new Error('Failed to add book to library for wishlist');
+      if (!response.ok) throw new Error('Failed to create book for wishlist');
 
       result = await response.json();
       bookId = result.id; // Use the newly created book's ID

@@ -24,10 +24,11 @@ Book.init(
     },
     cover_img: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     isbn: {
       type: DataTypes.STRING,
@@ -36,7 +37,7 @@ Book.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'user',
         key: 'id',

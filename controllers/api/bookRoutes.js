@@ -50,7 +50,7 @@ router.post('/check', withAuth, async (req, res) => {
   }
 });
 
-// Validate data and create book if correct
+// Add book to library
 
 router.post('/', withAuth, async (req, res) => {
   const { title, author, cover_img, isbn, status, addToLibrary } = req.body;
@@ -74,6 +74,39 @@ router.post('/', withAuth, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to add book' });
+  }
+});
+
+router.post('/wishlist', withAuth, async (req, res) => {
+  console.log('Request body:', req.body); // Log the incoming request body
+  const { title, author, cover_img, isbn } = req.body;
+
+  if (!title || !author || !isbn) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    // Check if the book already exists in the database
+    let book = await Book.findOne({ where: { isbn } });
+    console.log('Found book:', book); // Log if the book was found
+
+    if (!book) {
+      // Create the book if it doesn't exist
+      book = await Book.create({
+        title,
+        author,
+        cover_img,
+        isbn,
+        status: null, // No status needed for wishlist books
+        user_id: null, // No association with user for wishlist books
+      });
+      console.log('Created book:', book); // Log the created book
+    }
+
+    res.status(200).json(book);
+  } catch (err) {
+    console.error('Error creating book for wishlist:', err); // Log the error
+    res.status(500).json({ message: 'Failed to add book to wishlist' });
   }
 });
 
