@@ -48,4 +48,13 @@
     {{/each}}
 </section>
 
+<section>
+    <h2>Your Wishlist:</h2>
+    <section class="grid">
+        {{#each book as |book|}}
+            {{>profile-wishlist}}
+        {{/each}}
+    </section>
+</section>
+
 <script src="/js/profile.js"></script>

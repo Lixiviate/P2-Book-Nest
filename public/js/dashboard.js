@@ -102,12 +102,40 @@ async function addToWishlist(event) {
     isbn: event.target.dataset.isbn,
   };
 
-  console.log('Book data being sent:', bookData);
-
   try {
-    let response = await fetch('/api/books/', {
+    // Check if the book exists in the library
+    let response = await fetch('/api/books/check', {
       method: 'POST',
-      body: JSON.stringify(bookData),
+      body: JSON.stringify({ isbn: bookData.isbn }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) throw new Error('Failed to check book existence');
+
+    let result = await response.json();
+    let bookId;
+
+    if (result.exists) {
+      // If the book exists, get its ID
+      bookId = result.book_id;
+    } else {
+      // If the book doesn't exist, create it in the library first
+      response = await fetch('/api/books', {
+        method: 'POST',
+        body: JSON.stringify(bookData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) throw new Error('Failed to add book to library');
+
+      result = await response.json();
+      bookId = result.id; // Use the newly created book's ID
+    }
+
+    // Now add the book to the wishlist using the bookId
+    response = await fetch('/api/books/wishlist', {
+      method: 'POST',
+      body: JSON.stringify({ book_id: bookId }),
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -118,7 +146,7 @@ async function addToWishlist(event) {
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred while adding the book to wishlist');
+    alert('An error occurred while adding the book to your wishlist');
   }
 }
 
