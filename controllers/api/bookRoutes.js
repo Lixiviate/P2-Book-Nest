@@ -109,8 +109,6 @@ router.post('/wishlist', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
-
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const updatedBook = await Book.update(
@@ -127,3 +125,5 @@ router.put('/:id', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+module.exports = router;

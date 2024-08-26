@@ -111,12 +111,12 @@ document
   .addEventListener('submit', updateEmailHandler);
 
 document
-    .querySelector('.book-form')
-    .addEventListener('submit', bookStatusHandler);
+  .querySelector('.book-form')
+  .addEventListener('submit', bookStatusHandler);
 
-document.querySelector('.pass-form')
+document
+  .querySelector('.pass-form')
   .addEventListener('submit', updatePasswordHandler);
-
 
 document.querySelectorAll('.remove-from-library').forEach((button) => {
   button.addEventListener('click', async (event) => {
@@ -143,7 +143,6 @@ document.querySelectorAll('.remove-from-library').forEach((button) => {
     }
   });
 });
-
 
 document.querySelectorAll('.remove-from-wishlist').forEach((button) => {
   button.addEventListener('click', async (event) => {
@@ -173,4 +172,3 @@ document.querySelectorAll('.remove-from-wishlist').forEach((button) => {
     }
   });
 });
-
