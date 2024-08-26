@@ -105,33 +105,30 @@ router.put('/password-update', async (req, res) => {
     );
 
     if (validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Cannot user current password.' });
+      res.status(400).json({ message: 'Cannot user current password.' });
       return;
-
     } else {
-        // Update password to what was entered in the form, and make sure to let sequelize know to listen to the hooks in the model.
-        const updatePassword = await User.update(
-            {
-                password: req.body.password,
-            },
-            {
-                where: {
-                    username: req.session.username,
-                },
-                individualHooks: true,
-            },
-        );
+      // Update password to what was entered in the form, and make sure to let sequelize know to listen to the hooks in the model.
+      const updatePassword = await User.update(
+        {
+          password: req.body.password,
+        },
+        {
+          where: {
+            username: req.session.username,
+          },
+          individualHooks: true,
+        },
+      );
 
-        // Refresh the page so the username form is blank again.
-        if(updatePassword) {
-            res.render('profile', {
-                username: req.session.username,
-                email: req.session.email,
-            });
-        };
-    };
+      // Refresh the page so the username form is blank again.
+      if (updatePassword) {
+        res.render('profile', {
+          username: req.session.username,
+          email: req.session.email,
+        });
+      }
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
