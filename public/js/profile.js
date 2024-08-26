@@ -119,7 +119,7 @@ document.querySelectorAll('.remove-from-library').forEach((button) => {
 
 document.querySelectorAll('.remove-from-wishlist').forEach((button) => {
   button.addEventListener('click', async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default form submission
 
     const bookElement = event.target.closest('.wishlist-form');
     const bookData = {
@@ -145,5 +145,7 @@ document.querySelectorAll('.remove-from-wishlist').forEach((button) => {
     }
   });
 });
+
+
 
 

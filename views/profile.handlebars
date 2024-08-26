@@ -41,20 +41,24 @@
     </form>
 
 </section>
-<h2>Your Books:</h2>
-<section class="grid">
-    {{#each books as |book|}}
-        {{>profile-books}}
-    {{/each}}
+
+
+<section>
+    <h2>Your Books:</h2>
+        <section class="grid">
+            {{#each books as |book|}}
+                {{> profile-books}}
+            {{/each}}
+        </section>
 </section>
 
 <section>
     <h2>Your Wishlist:</h2>
-    <section class="grid">
-        {{#each wishlist as |item|}}
-            {{>profile-wishlist item=item.book}}
-        {{/each}}
-    </section>
+       <section class="grid">
+            {{#each wishlist as |item|}}
+                {{> profile-wishlist item=item.book}}
+            {{/each}}
+        </section>
 </section>
 
 <script src="/js/profile.js"></script>

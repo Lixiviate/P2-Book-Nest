@@ -50,31 +50,31 @@ router.post('/check', withAuth, async (req, res) => {
   }
 });
 
-// Validate data
+// Validate data and create book if correct
 
 router.post('/', withAuth, async (req, res) => {
-  const { title, author, cover_img, status, isbn } = req.body;
+  const { title, author, cover_img, isbn, status, addToLibrary } = req.body;
 
   if (!title || !author || !isbn) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
   try {
+    // Check if the book is being added to the library or just to the wishlist
     const newBook = await Book.create({
       title,
       author,
       cover_img,
-      status: 'Available',
       isbn,
-      user_id: req.session.user_id,
+      status: addToLibrary ? 'Available' : null, // Only set status if adding to library
+      user_id: addToLibrary ? req.session.user_id : null, // Only associate with the user if adding to library
     });
 
     res.status(200).json(newBook);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Failed to add book to library' });
+    res.status(500).json({ message: 'Failed to add book' });
   }
 });
-
 
 module.exports = router;
