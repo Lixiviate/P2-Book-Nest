@@ -102,6 +102,8 @@ async function addToWishlist(event) {
     isbn: event.target.dataset.isbn,
   };
 
+  console.log('Book data being sent:', bookData);
+
   try {
     // Check if the book exists in the library
     let response = await fetch('/api/books/check', {
@@ -132,7 +134,7 @@ async function addToWishlist(event) {
       bookId = result.id; // Use the newly created book's ID
     }
 
-    // Now add the book to the wishlist using the bookId
+    // Add the book to the wishlist using the bookId
     response = await fetch('/api/books/wishlist', {
       method: 'POST',
       body: JSON.stringify({ book_id: bookId }),

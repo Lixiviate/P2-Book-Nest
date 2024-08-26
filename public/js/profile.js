@@ -88,3 +88,62 @@ document
 document
     .querySelector('.book-form')
     .addEventListener('submit', bookStatusHandler);
+
+
+document.querySelectorAll('.remove-from-library').forEach((button) => {
+  button.addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const bookElement = event.target.closest('.book-form');
+    const bookId = bookElement.dataset.bookId;
+
+    try {
+      const response = await fetch(`/api/profile/library/${bookId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        alert('Book removed from your library!');
+        document.location.reload();
+      } else {
+        alert('Failed to remove book from library');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while removing the book from your library');
+    }
+  });
+});
+
+
+document.querySelectorAll('.remove-from-wishlist').forEach((button) => {
+  button.addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const bookElement = event.target.closest('.wishlist-form');
+    const bookData = {
+      isbn: bookElement.dataset.isbn,
+    };
+
+    try {
+      const response = await fetch('/api/wishlist/remove', {
+        method: 'DELETE',
+        body: JSON.stringify(bookData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        alert('Book removed from your wishlist!');
+        document.location.reload();
+      } else {
+        alert('Failed to remove book from wishlist');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while removing the book from your wishlist');
+    }
+  });
+});
+
+

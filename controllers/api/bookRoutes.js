@@ -50,4 +50,31 @@ router.post('/check', withAuth, async (req, res) => {
   }
 });
 
+// Validate data
+
+router.post('/', withAuth, async (req, res) => {
+  const { title, author, cover_img, status, isbn } = req.body;
+
+  if (!title || !author || !isbn) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  try {
+    const newBook = await Book.create({
+      title,
+      author,
+      cover_img,
+      status: 'Available',
+      isbn,
+      user_id: req.session.user_id,
+    });
+
+    res.status(200).json(newBook);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to add book to library' });
+  }
+});
+
+
 module.exports = router;
