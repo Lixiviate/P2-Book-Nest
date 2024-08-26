@@ -43,6 +43,7 @@ function displayResults(books) {
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
           <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
+          <button class="request-borrow" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Request to Borrow</button>
         </div>
       </div>
     `;
@@ -50,6 +51,10 @@ function displayResults(books) {
 
   document.querySelectorAll('.add-to-library').forEach((button) => {
     button.addEventListener('click', addToLibrary);
+  });
+
+  document.querySelectorAll('.request-borrow').forEach((button) => {
+    button.addEventListener('click', requestToBorrow);
   });
 }
 async function addToLibrary(event) {
@@ -119,5 +124,49 @@ async function fetchAuthor(authorKey) {
     };
   } catch {
     return { name: 'Unknown', link: '#' };
+  }
+}
+
+document.addEventListener('click', async (event) => {
+  if (event.target.matches('.request-borrow')) {
+    await requestToBorrow(event);
+  }
+});
+
+async function requestToBorrow(event) {
+  event.stopPropagation();
+  const isbn = event.target.dataset.isbn;
+  try {
+    const response = await fetch(`/api/books/${isbn}/owners`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const owners = await response.json();
+
+    if (owners.length > 0) {
+      const owner = owners[0];
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h3>Book Owner Information</h3>
+          <p>Username: ${owner.username}</p>
+          <p>Email: ${owner.email}</p>
+          <p>Book Status: ${owner.books[0].status}</p>
+          <button class="btn btn-primary close-modal">Close</button>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+
+      modal.querySelector('.close-modal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+      });
+    } else {
+      alert('No owners found for this book.');
+    }
+  } catch (error) {
+    console.error('Error fetching owners:', error);
+    alert('Failed to fetch book owner information. Please try again later.');
   }
 }

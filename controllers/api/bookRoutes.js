@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book } = require('../../models');
+const { Book, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get route for a specific book owner
@@ -32,8 +32,6 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-module.exports = router;
-
 router.put('/:id', withAuth, async (req, res) => {
   try {
     const updatedBook = await Book.update(
@@ -50,3 +48,24 @@ router.put('/:id', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.get('/:isbn/owners', async (req, res) => {
+  try {
+    console.log('Fetching owners for ISBN:', req.params.isbn);
+    const bookOwners = await User.findAll({
+      include: [
+        {
+          model: Book,
+          where: { isbn: req.params.isbn },
+        },
+      ],
+    });
+    console.log('Found owners:', bookOwners);
+    res.json(bookOwners);
+  } catch (err) {
+    console.error('Error fetching book owners:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+module.exports = router;

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   if (justLoggedIn) {
     const safetyModal = document.getElementById('safety-modal');
-    safetyModal.style.display = 'block';
+    safetyModal.style.display = 'flex';
 
     const closeButton = document.getElementById('close-modal');
     closeButton.addEventListener('click', function () {
