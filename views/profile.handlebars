@@ -51,8 +51,8 @@
 <section>
     <h2>Your Wishlist:</h2>
     <section class="grid">
-        {{#each book as |book|}}
-            {{>profile-wishlist}}
+        {{#each wishlist as |item|}}
+            {{>profile-wishlist item=item.book}}
         {{/each}}
     </section>
 </section>

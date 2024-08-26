@@ -132,7 +132,7 @@ async function addToWishlist(event) {
       bookId = result.id; // Use the newly created book's ID
     }
 
-    // Now add the book to the wishlist using the correct route and bookId
+    // Add the book to the wishlist using the correct route and bookId
     response = await fetch('/api/wishlist', {
       method: 'POST',
       body: JSON.stringify({ book_id: bookId }),

@@ -4,7 +4,7 @@ const withAuth = require('../../utils/auth');
 
 // POST route for adding book to the wishlist
 
-router.post('/wishlist', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const { book_id } = req.body;
 

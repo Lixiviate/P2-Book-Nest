@@ -1,12 +1,11 @@
 <details>
-    <summary role="button" class="secondary">{{title}}</summary>
-    <form class="wishlist-form" data-isbn={{isbn}}>
+    <summary role="button" class="secondary">{{item.title}}</summary>
+    <form class="wishlist-form" data-isbn={{item.isbn}}>
         <p>
-            <img src="{{cover_img}}" alt="{{title}}">
-            <p>by: {{author}}</p>
-            <p>ISBN: {{isbn}}</p>
+            <img src="{{item.cover_img}}" alt="{{item.title}}">
+            <p>by: {{item.author}}</p>
+            <p>ISBN: {{item.isbn}}</p>
         </p>
-        <!-- Allows users to remove items from their wishlist -->
         <div class="grid book-details">
             <button class="remove-from-wishlist" type="submit">Remove from Wishlist</button>
         </div>
