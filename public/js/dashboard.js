@@ -42,7 +42,10 @@ function displayResults(books) {
           <p class="book-author">Author: ${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
           <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
           <p>ISBN: ${book.isbn && book.isbn.length ? book.isbn[0] : 'N/A'}</p>
-          <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
+          <div class ="button-group"> 
+            <button class="add-to-library" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Library</button>
+            <button class="add-to-wishlist" data-isbn="${book.isbn && book.isbn.length ? book.isbn[0] : ''}">Add to Wishlist</button>
+          </div>
         </div>
       </div>
     `;
@@ -51,7 +54,12 @@ function displayResults(books) {
   document.querySelectorAll('.add-to-library').forEach((button) => {
     button.addEventListener('click', addToLibrary);
   });
+
+  document.querySelectorAll('.add-to-wishlist').forEach((button) => {
+    button.addEventListener('click', addToWishlist);
+  });
 }
+
 async function addToLibrary(event) {
   const bookElement = event.target.closest('.book-item');
   const bookData = {
@@ -65,7 +73,7 @@ async function addToLibrary(event) {
   };
 
   try {
-    const response = await fetch('/api/books', {
+    const response = await fetch('/api/books/library', {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: { 'Content-Type': 'application/json' },
@@ -81,6 +89,67 @@ async function addToLibrary(event) {
     alert('An error occurred while adding the book');
   }
 }
+
+async function addToWishlist(event) {
+  const bookElement = event.target.closest('.book-item');
+  const bookData = {
+    title: bookElement.querySelector('.book-title').textContent,
+    author: bookElement
+      .querySelector('.book-author')
+      .textContent.replace('Author: ', ''),
+    cover_img: bookElement.querySelector('img').src,
+    isbn: event.target.dataset.isbn,
+    addToLibrary: false,
+  };
+
+  try {
+    // Check if the book exists in the library
+    let response = await fetch('/api/books/check', {
+      method: 'POST',
+      body: JSON.stringify({ isbn: bookData.isbn }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) throw new Error('Failed to check book existence');
+
+    let result = await response.json();
+    let bookId;
+
+    if (result.exists) {
+      // If the book exists, get its ID
+      bookId = result.book_id;
+    } else {
+      // Create a new book record only if it doesn't exist
+      response = await fetch('/api/books/wishlist', {
+        method: 'POST',
+        body: JSON.stringify(bookData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) throw new Error('Failed to create book for wishlist');
+
+      result = await response.json();
+      bookId = result.id; // Use the newly created book's ID
+    }
+
+    // Add the book to the wishlist using the correct route and bookId
+    response = await fetch('/api/wishlist', {
+      method: 'POST',
+      body: JSON.stringify({ book_id: bookId }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      alert('Book added to your wishlist!');
+    } else {
+      alert('Failed to add book to wishlist');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while adding the book to your wishlist');
+  }
+}
+
 async function displayISBNResult(book) {
   const resultsContainer = document.getElementById('search-results');
   resultsContainer.innerHTML = '';

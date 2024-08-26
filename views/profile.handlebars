@@ -41,15 +41,25 @@
     </section>
 </aside>
 
-    <section class="books-section">
-        <h2>Your Books:</h2>
+</section>
+
+
+<section class="books-section">
+    <h2>Your Books:</h2>
         <div class="grid">
             {{#each books as |book|}}
-                {{>profile-books}}
+                {{> profile-books}}
             {{/each}}
         </div>
-    </section>
-</div>
+</section>
 
+<section class="books-section">
+    <h2>Your Wishlist:</h2>
+       <div class="grid">
+            {{#each wishlist as |item|}}
+                {{> profile-wishlist item=item.book}}
+            {{/each}}
+        </div>
+</section>
 
 <script src="/js/profile.js"></script>

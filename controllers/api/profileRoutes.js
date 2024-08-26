@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Book } = require('../../models');
 const bcrypt = require('bcrypt');
+const withAuth = require('../../utils/auth');
 
 router.put('/username-update', async (req, res) => {
   try {
@@ -132,6 +133,29 @@ router.put('/password-update', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+});
+
+// DELETE route for removing a book from the user's library
+router.delete('/library/:id', withAuth, async (req, res) => {
+  try {
+    const bookId = req.params.id;
+
+    const deleted = await Book.destroy({
+      where: {
+        id: bookId,
+        user_id: req.session.user_id, // Ensure the book belongs to the logged-in user
+      },
+    });
+
+    if (!deleted) {
+      return res.status(404).json({ message: 'No book found with this id' });
+    }
+
+    res.status(200).json({ message: 'Book removed from library' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to remove book from library' });
   }
 });
 

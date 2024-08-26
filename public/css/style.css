@@ -419,7 +419,12 @@ label {
   margin-bottom: 1rem;
 }
 
-.add-to-library {
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.add-to-library, .add-to-wishlist {
   background-color: #cb7e4b;
   color: white;
   padding: 0.8rem 1.5rem;
@@ -434,7 +439,7 @@ label {
   text-align: center;
 }
 
-.add-to-library:hover {
+.add-to-library:hover, .add-to-library:hover {
   background-color: #6c8184;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
