@@ -105,7 +105,7 @@ async function addToWishlist(event) {
   console.log('Book data being sent:', bookData);
 
   try {
-    let response = await fetch(`/api/books/`, {
+    let response = await fetch('/api/books/', {
       method: 'POST',
       body: JSON.stringify(bookData),
       headers: { 'Content-Type': 'application/json' },
