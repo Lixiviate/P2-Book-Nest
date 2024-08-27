@@ -56,7 +56,7 @@ const updatePasswordHandler = async (event) => {
       alert('Password changed!');
       document.location.replace('/profile');
     } else {
-      alert('This password is already in use by horizonbound0');
+      alert('Unable to update password.');
     }
   }
 };
@@ -98,9 +98,17 @@ const bookStatusHandler = async (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  
   document.querySelectorAll('.change-status').forEach((button) => {
     button.addEventListener('click', bookStatusHandler);
   });
+
+  if(document.querySelector('.book-form')) {    
+    document
+    .querySelector('.book-form')
+    .addEventListener('submit', bookStatusHandler);
+  };
+
 });
 document
   .querySelector('.username-form')
@@ -109,10 +117,6 @@ document
 document
   .querySelector('.email-form')
   .addEventListener('submit', updateEmailHandler);
-
-document
-  .querySelector('.book-form')
-  .addEventListener('submit', bookStatusHandler);
 
 document
   .querySelector('.pass-form')
