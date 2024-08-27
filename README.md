@@ -1,34 +1,35 @@
-# P2-Book-Nest
+# BookNest
 
 ## Project Description
 
-Book Nest is a web application designed to facilitate peer-to-peer book lending. Users can create their own collections of books, share them with others, and borrow books from other users. The application provides a simple and user-friendly way to manage book ownership and borrowing, helping users keep track of their books and interact with fellow book enthusiasts.
+BookNest is a web application designed to facilitate peer-to-peer book lending. Users can create their own collections of books, share them with others, and borrow books from other users. The application provides a simple and user-friendly way to manage book ownership and borrowing, helping users keep track of their books and interact with fellow book enthusiasts.
 
 ## Features
 
 - **User Authentication:** Secure user login and registration with hashed passwords using bcrypt.
 - **Book Search:** Users can search for books by title or ISBN using the Open Library API.
 - **Add Books to Collection:** Users can add books to their personal collection directly from the search results.
+- **Add Books to Wishlist:** Users can add desired books to a wishlist directly from the search results.
 - **Safe Sharing Notification:** The app features a banner to remind users to practice safe sharing by meeting in public locations when exchanging books.
-- **Borrowing and Returning Books:** Work in progress.
+- **Borrowing and Returning Books:** Future development.
 
 ## Usage
 
 1. **Registration and Login:** Users must register an account or log in to access their book collection and borrowing features.
 2. **Search for Books:** Use the search bar to look for books by title or ISBN. The search results are limited to the top 10 results.
-3. **Add Books:** Click the "Add Book" button next to a book in the search results to add it to your collection.
-4. **Borrow and Return Books:** Work in progress.
+3. **Add Books:** Click the "Add Book" button next to a book in the search results to add it to your collection or wishlist.
+4. **Borrow and Return Books:** Future development.
 5. **Safe Sharing Practices:** Follow on-screen prompts to ensure safe exchanges when meeting others to share books.
 
 ## Example(s)
 
 [Link to Demo](https://p2-book-nest.onrender.com/)
 
-![Example 1](#)
+![BookNest Homepage](/images/homepage.png)
 
-![Example 2](#)
+![BookNest Dashboard](/images/dashboard.png)
 
-![Example 3](#)
+![BookNest Profile](/images/profile.png)
 
 ## Source Code
 
