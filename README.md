@@ -25,11 +25,11 @@ BookNest is a web application designed to facilitate peer-to-peer book lending. 
 
 [Link to Demo](https://p2-book-nest.onrender.com/)
 
-![BookNest Homepage](/images/homepage.png)
+![BookNest Homepage](/images/Homepage.png)
 
-![BookNest Dashboard](/images/dashboard.png)
+![BookNest Dashboard](/images/Dashboard.png)
 
-![BookNest Profile](/images/profile.png)
+![BookNest Profile](/images/Profile.png)
 
 ## Source Code
 
