@@ -32,6 +32,7 @@ router.get('/', async (req, res) => {
 
     res.render('homepage', {
       books,
+      pageTitle: 'Home',
       loggedIn: req.session.loggedIn,
       justLoggedIn,
     });
@@ -47,7 +48,9 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-  res.render('login');
+  res.render('login', {
+    pageTitle: 'Login',
+  });
 });
 
 // GET signup page
@@ -58,11 +61,14 @@ router.get('/signup', (req, res) => {
     return;
   }
   // Render signup page
-  res.render('signup');
+  res.render('signup', {
+    pageTitle: 'Signup',
+  });
 });
 
 router.get('/dashboard', withAuth, (req, res) => {
   res.render('dashboard', {
+    pageTitle: 'Dashboard',
     loggedIn: req.session.loggedIn,
   });
 });
@@ -95,6 +101,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
     // Render profile with books and wishlist
     res.render('profile', {
+      pageTitle: 'Profile',
       books: userBooks,
       wishlist: wishlistItems,
       loggedIn: req.session.loggedIn,

@@ -65,7 +65,7 @@ router.post('/', withAuth, async (req, res) => {
       author,
       cover_img,
       isbn,
-      status, 
+      status,
       user_id: req.session.user_id,
     });
 
