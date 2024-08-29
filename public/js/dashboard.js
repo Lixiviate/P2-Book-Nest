@@ -73,7 +73,7 @@ async function addToLibrary(event) {
   };
 
   console.log('Sending book data:', bookData);
-  
+
   try {
     const response = await fetch('/api/books', {
       method: 'POST',

@@ -98,17 +98,15 @@ const bookStatusHandler = async (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  
   document.querySelectorAll('.change-status').forEach((button) => {
     button.addEventListener('click', bookStatusHandler);
   });
 
-  if(document.querySelector('.book-form')) {    
+  if (document.querySelector('.book-form')) {
     document
-    .querySelector('.book-form')
-    .addEventListener('submit', bookStatusHandler);
-  };
-
+      .querySelector('.book-form')
+      .addEventListener('submit', bookStatusHandler);
+  }
 });
 document
   .querySelector('.username-form')
